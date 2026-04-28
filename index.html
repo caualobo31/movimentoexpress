@@ -75,13 +75,6 @@
       z-index: 0;
     }
 
-    /* ── Sticky CTA ── */
-    #sticky-bar {
-      transform: translateY(110%);
-      transition: transform .38s cubic-bezier(.4,0,.2,1);
-      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
-    }
-    #sticky-bar.show { transform: translateY(0); }
 
     /* ── FAQ ── */
     .faq-body {
@@ -199,14 +192,6 @@
 </head>
 <body class="font-body">
 
-<!-- ══════════════════════════════════════════
-     STICKY MOBILE CTA BAR
-══════════════════════════════════════════ -->
-<div id="sticky-bar" class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white/95 backdrop-blur border-t border-gray-200 shadow-2xl px-4 py-3">
-  <a href="#planos" class="btn-cta block w-full text-center py-3 text-sm tracking-wide">
-    Ver preço e adquirir agora →
-  </a>
-</div>
 
 
 <!-- ══════════════════════════════════════════
@@ -285,7 +270,7 @@
     <div class="divider" data-aos="fade-up"></div>
 
     <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-800 mb-5 leading-snug" data-aos="fade-up">
-      Ele fica cada vez mais parado.
+      Ele fica cada vez mais parado?
     </h2>
 
     <p class="text-base text-gray-600 leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="80">
@@ -347,7 +332,7 @@
     </div>
 
     <div class="text-center" data-aos="fade-up">
-      <a href="#planos" class="btn-outline">Quero conhecer os planos <i class="ph ph-arrow-right"></i></a>
+      <a href="#planos" class="btn-outline">Quero conhecer <i class="ph ph-arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -913,13 +898,6 @@
     y: 56, opacity: 0, duration: .8, ease: 'power3.out'
   });
 
-  /* ── Sticky CTA bar ── */
-  const heroEl = document.getElementById('hero');
-  const stickyBar = document.getElementById('sticky-bar');
-  const io = new IntersectionObserver(([e]) => {
-    stickyBar.classList.toggle('show', !e.isIntersecting);
-  }, { threshold: 0.05 });
-  io.observe(heroEl);
 
   /* ── FAQ accordion ── */
   document.querySelectorAll('.faq-btn').forEach(btn => {
