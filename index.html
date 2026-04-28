@@ -47,8 +47,8 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
-    body { font-family: 'Poppins', system-ui, sans-serif !important; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; overflow-x: hidden; }
+    body { font-family: 'Poppins', system-ui, sans-serif !important; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     * { font-family: inherit; }
 
     /* ── Animations ── */
@@ -79,6 +79,7 @@
     #sticky-bar {
       transform: translateY(110%);
       transition: transform .38s cubic-bezier(.4,0,.2,1);
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
     }
     #sticky-bar.show { transform: translateY(0); }
 
@@ -159,6 +160,41 @@
       transition: background .2s, color .2s;
     }
     .btn-outline:hover { background: #4a7c59; color: #fff; }
+
+    /* ── Mobile overrides ── */
+    @media (max-width: 639px) {
+      /* Tipografia responsiva */
+      h1 { font-size: clamp(1.75rem, 7vw, 2.5rem) !important; line-height: 1.2 !important; }
+      h2 { font-size: clamp(1.5rem, 6vw, 2rem) !important; }
+      .text-gradient.font-bold { font-size: clamp(2rem, 10vw, 3rem) !important; }
+
+      /* Seções — menos padding vertical */
+      section { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+      #hero { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+
+      /* Cards padding */
+      .rounded-3xl.p-8  { padding: 1.25rem !important; }
+      .rounded-3xl.p-10 { padding: 1.5rem !important; }
+
+      /* FAQ botões */
+      .faq-btn { padding: 1rem 1.25rem !important; font-size: .9rem; }
+
+      /* Preço R$37 */
+      .font-extrabold[style*="5.5rem"] { font-size: clamp(3.5rem, 18vw, 5rem) !important; }
+
+      /* Botões CTA full-width no mobile */
+      .btn-cta.text-base, .btn-outline { width: 100%; justify-content: center; text-align: center; }
+
+      /* Remove animações que causam overflow lateral */
+      [data-aos="fade-right"]  { --aos-translate-x: 0 !important; }
+      [data-aos="fade-left"]   { --aos-translate-x: 0 !important; }
+
+      /* Bloco 10 stack de valor — texto menor pra caber */
+      .bg-gray-50.rounded-2xl span { font-size: .75rem !important; }
+
+      /* Garantia padding */
+      #garantia .rounded-3xl { padding: 1.5rem !important; }
+    }
   </style>
 </head>
 <body class="font-body">
@@ -181,7 +217,7 @@
   <div class="pointer-events-none absolute top-0 right-0 w-72 h-72 rounded-full opacity-25 -translate-y-1/2 translate-x-1/3" style="background:#d8eee1;filter:blur(60px)"></div>
   <div class="pointer-events-none absolute bottom-0 left-0 w-56 h-56 rounded-full opacity-20 translate-y-1/3 -translate-x-1/4" style="background:#d8eee1;filter:blur(50px)"></div>
 
-  <div class="relative max-w-2xl mx-auto px-5 py-20 md:py-28 text-center">
+  <div class="relative max-w-2xl mx-auto px-5 py-12 md:py-24 text-center">
 
     <!-- Badge -->
     <div class="inline-flex items-center gap-2 bg-sage-100 text-sage-700 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6" data-aos="fade-down">
@@ -189,15 +225,28 @@
     </div>
 
     <!-- Headline -->
-    <h1 class="font-display text-4xl md:text-5xl lg:text-[3.4rem] font-bold text-sage-900 leading-[1.15] mb-5" data-aos="fade-up" data-aos-delay="80">
+    <h1 class="font-display text-3xl md:text-5xl lg:text-[3.4rem] font-bold text-sage-900 leading-tight mb-4" data-aos="fade-up" data-aos-delay="80">
       +300 Atividades Para o Corpo e a Mente de Idosos,
       <em class="text-gradient not-italic"> Prontas Para Aplicar Hoje</em>
     </h1>
 
     <!-- Sub -->
-    <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="160">
+    <p class="text-base md:text-xl text-gray-600 leading-relaxed mb-6 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="160">
       Exercícios físicos e cognitivos organizados por objetivo e nível de dificuldade. Qualquer pessoa consegue aplicar com segurança.
     </p>
+
+    <!-- Vimeo video -->
+    <div class="mx-auto mb-10 max-w-xl rounded-2xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="200">
+      <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe
+          src="https://player.vimeo.com/video/SEU_ID_AQUI?badge=0&autopause=0&player_id=0&app_id=58479"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;"
+          title="Movimento Express">
+        </iframe>
+      </div>
+    </div>
 
     <!-- Bullets -->
     <div class="grid grid-cols-2 gap-3 max-w-md mx-auto mb-10 text-left" data-aos="fade-up" data-aos-delay="240">
@@ -209,7 +258,7 @@
 
     <!-- CTA -->
     <div data-aos="fade-up" data-aos-delay="320">
-      <a href="#planos" class="btn-cta pulse-btn text-lg py-5 px-10 mb-6">
+      <a href="#planos" class="btn-cta pulse-btn text-base md:text-lg py-4 px-6 w-full md:w-auto block md:inline-block">
         Quero minhas atividades agora
       </a>
     </div>
@@ -258,23 +307,33 @@
 <!-- ══════════════════════════════════════════
      BLOCO 3 — MECANISMO
 ══════════════════════════════════════════ -->
-<section id="mecanismo" class="py-16 md:py-24 bg-white">
+<section id="mecanismo" class="py-16 md:py-24 bg-white overflow-hidden">
   <div class="max-w-3xl mx-auto px-5">
-    <div class="text-center mb-12">
+    <div class="text-center mb-10">
       <div class="divider" data-aos="fade-up"></div>
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-sage-900 mb-4" data-aos="fade-up">
-        A solução se chama <span class="text-gradient">Movimento Express</span>
+      <p class="text-lg text-sage-600 font-semibold mb-1" data-aos="fade-up">A solução se chama</p>
+      <h2 class="font-display text-4xl md:text-6xl font-bold text-gradient leading-tight mb-6" data-aos="fade-up" data-aos-delay="60">
+        Movimento Express
       </h2>
-      <p class="text-lg text-gray-600 leading-relaxed mb-2" data-aos="fade-up" data-aos-delay="80">
+      <p class="text-lg text-gray-600 leading-relaxed mb-2" data-aos="fade-up" data-aos-delay="120">
         +300 atividades para corpo e mente, organizadas por objetivo, nível de dificuldade e condição do idoso.
       </p>
-      <p class="text-gray-500 leading-relaxed" data-aos="fade-up" data-aos-delay="120">
+      <p class="text-gray-500 leading-relaxed" data-aos="fade-up" data-aos-delay="160">
         Não é uma lista solta de exercícios. É um material estruturado pra você encontrar a atividade certa em segundos e aplicar com segurança — mesmo sem experiência.
       </p>
     </div>
 
-    <!-- 6 cards -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+    <!-- Mockup flutuando -->
+    <div class="flex justify-center mb-10" data-aos="zoom-in" data-aos-delay="100">
+      <img
+        src="images/Design sem nome.png"
+        alt="Movimento Express — material completo"
+        class="float"
+        style="max-width:320px;width:100%;filter:drop-shadow(0 24px 40px rgba(45,90,61,0.22));">
+    </div>
+
+    <!-- 4 cards -->
+    <div class="grid grid-cols-2 gap-4 mb-10">
       <div class="card-lift bg-sage-50 border border-sage-100 rounded-2xl p-5 text-center" data-aos="zoom-in" data-aos-delay="0">
         <i class="ph ph-person-simple-walk text-sage-500 text-4xl mb-2 block"></i>
         <p class="font-semibold text-sage-800 text-sm">Mobilidade e Equilíbrio</p>
@@ -284,18 +343,10 @@
         <p class="font-semibold text-sage-800 text-sm">Força e Resistência</p>
       </div>
       <div class="card-lift bg-sage-50 border border-sage-100 rounded-2xl p-5 text-center" data-aos="zoom-in" data-aos-delay="120">
-        <i class="ph ph-hand-pointing text-sage-500 text-4xl mb-2 block"></i>
-        <p class="font-semibold text-sage-800 text-sm">Coordenação Motora</p>
-      </div>
-      <div class="card-lift bg-sage-50 border border-sage-100 rounded-2xl p-5 text-center" data-aos="zoom-in" data-aos-delay="180">
         <i class="ph ph-brain text-sage-500 text-4xl mb-2 block"></i>
         <p class="font-semibold text-sage-800 text-sm">Memória e Raciocínio</p>
       </div>
-      <div class="card-lift bg-sage-50 border border-sage-100 rounded-2xl p-5 text-center" data-aos="zoom-in" data-aos-delay="240">
-        <i class="ph ph-ear text-sage-500 text-4xl mb-2 block"></i>
-        <p class="font-semibold text-sage-800 text-sm">Estímulo Sensorial</p>
-      </div>
-      <div class="card-lift bg-sage-50 border border-sage-100 rounded-2xl p-5 text-center" data-aos="zoom-in" data-aos-delay="300">
+      <div class="card-lift bg-sage-50 border border-sage-100 rounded-2xl p-5 text-center" data-aos="zoom-in" data-aos-delay="180">
         <i class="ph ph-users-three text-sage-500 text-4xl mb-2 block"></i>
         <p class="font-semibold text-sage-800 text-sm">Socialização e Bem-Estar</p>
       </div>
@@ -402,6 +453,10 @@
       </div>
 
     </div>
+
+    <div class="text-center mt-10" data-aos="fade-up">
+      <a href="#planos" class="btn-cta text-base py-4 px-8 w-full md:w-auto block md:inline-block">Quero minhas atividades agora</a>
+    </div>
   </div>
 </section>
 
@@ -418,16 +473,13 @@
 
     <div class="flex flex-col md:flex-row items-center md:items-start gap-8 bg-white rounded-3xl p-8 shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="100">
       <div class="flex-shrink-0 text-center">
-        <div class="w-28 h-28 rounded-full flex items-center justify-center shadow-lg mx-auto" style="background:linear-gradient(135deg,#5ba87d,#1a3626)">
-          <i class="ph ph-user text-white" style="font-size:3rem"></i>
-        </div>
-        <p class="text-xs text-gray-400 mt-2">[Foto do criador]</p>
+        <img src="images/avatar sp.jpg" alt="Foto do criador" class="w-28 h-28 rounded-full object-cover shadow-lg mx-auto border-4 border-sage-100">
       </div>
       <div>
-        <h3 class="font-display text-xl font-bold text-gray-800 mb-1">[Nome do Criador]</h3>
-        <p class="text-sage-600 text-sm font-semibold mb-4">[Credencial — ex: Fisioterapeuta, CREFITO XXXXX]</p>
+        <h3 class="font-display text-xl font-bold text-gray-800 mb-1">Mariana Melo</h3>
+        <p class="text-sage-600 text-sm font-semibold mb-4">Fisioterapeuta</p>
         <p class="text-gray-600 leading-relaxed">
-          Desenvolvido por <strong>[Nome]</strong>, <strong>[credencial]</strong>. Este material reúne atividades testadas na prática, adaptadas para serem aplicadas com segurança por qualquer pessoa — profissional ou não.
+          Desenvolvido por <strong>Mariana Melo</strong>, <strong>Fisioterapeuta</strong>. Este material reúne atividades testadas na prática, adaptadas para serem aplicadas com segurança por qualquer pessoa — profissional ou não.
         </p>
       </div>
     </div>
@@ -467,6 +519,10 @@
         <p class="text-gray-700 leading-relaxed pt-1">Qualquer pessoa que convive com um idoso e quer fazer a diferença</p>
       </div>
     </div>
+
+    <div class="text-center mt-10" data-aos="fade-up">
+      <a href="#planos" class="btn-cta text-base py-4 px-8 w-full md:w-auto block md:inline-block">Quero o Movimento Express</a>
+    </div>
   </div>
 </section>
 
@@ -482,56 +538,46 @@
     </div>
 
     <div class="bg-white rounded-3xl shadow-sm border border-sage-100 p-8" data-aos="fade-up" data-aos-delay="100">
+      <div class="flex justify-center mb-6">
+        <img src="images/Design sem nome (1).png" alt="Movimento Express — conteúdo incluído"
+          style="max-width:140px;width:100%;filter:drop-shadow(0 8px 16px rgba(45,90,61,0.15));">
+      </div>
       <div class="space-y-4">
 
-        <div class="flex items-start justify-between gap-4" data-aos="fade-left" data-aos-delay="0">
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">+300 atividades físicas e cognitivas organizadas por objetivo e nível</p>
-          </div>
-          <span class="text-gray-400 text-sm font-medium flex-shrink-0 mt-0.5">R$297</span>
+        <div class="flex items-start gap-3" data-aos="fade-left" data-aos-delay="0">
+          <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
+          <p class="text-gray-700">+300 atividades físicas e cognitivas organizadas por objetivo e nível de dificuldade</p>
         </div>
         <div class="border-t border-gray-100"></div>
 
-        <div class="flex items-start justify-between gap-4" data-aos="fade-left" data-aos-delay="60">
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Guia de aplicação segura (cuidados por tipo de atividade)</p>
-          </div>
-          <span class="text-gray-400 text-sm font-medium flex-shrink-0 mt-0.5">R$47</span>
+        <div class="flex items-start gap-3" data-aos="fade-left" data-aos-delay="60">
+          <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
+          <p class="text-gray-700">Passo a passo simples para qualquer pessoa aplicar, mesmo sem experiência</p>
         </div>
         <div class="border-t border-gray-100"></div>
 
-        <div class="flex items-start justify-between gap-4" data-aos="fade-left" data-aos-delay="120">
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Fichas de acompanhamento de evolução</p>
-          </div>
-          <span class="text-gray-400 text-sm font-medium flex-shrink-0 mt-0.5">R$37</span>
+        <div class="flex items-start gap-3" data-aos="fade-left" data-aos-delay="120">
+          <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
+          <p class="text-gray-700">Recomendações de segurança em cada atividade</p>
         </div>
         <div class="border-t border-gray-100"></div>
 
-        <div class="flex items-start justify-between gap-4" data-aos="fade-left" data-aos-delay="180">
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Ebook: Exercícios para idosos com mobilidade reduzida</p>
-          </div>
-          <span class="text-gray-400 text-sm font-medium flex-shrink-0 mt-0.5">R$47</span>
+        <div class="flex items-start gap-3" data-aos="fade-left" data-aos-delay="180">
+          <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
+          <p class="text-gray-700">Atividades organizadas por tipo: mobilidade, força, coordenação, memória, sensorial e bem-estar</p>
         </div>
         <div class="border-t border-gray-100"></div>
 
-        <div class="flex items-start justify-between gap-4" data-aos="fade-left" data-aos-delay="240">
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Ebook: Atividades cognitivas para estímulo da memória</p>
-          </div>
-          <span class="text-gray-400 text-sm font-medium flex-shrink-0 mt-0.5">R$37</span>
+        <div class="flex items-start gap-3" data-aos="fade-left" data-aos-delay="240">
+          <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
+          <p class="text-gray-700">Funciona para todos os níveis de mobilidade, incluindo idosos acamados</p>
         </div>
-      </div>
+        <div class="border-t border-gray-100"></div>
 
-      <div class="border-t-2 border-sage-200 mt-6 pt-5 flex items-center justify-between" data-aos="fade-up" data-aos-delay="300">
-        <p class="text-gray-600 font-semibold">Valor total do conjunto</p>
-        <p class="text-2xl font-bold text-sage-700">R$465</p>
+        <div class="flex items-start gap-3" data-aos="fade-left" data-aos-delay="300">
+          <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
+          <p class="text-gray-700">Acesso imediato e vitalício assim que o pagamento é confirmado</p>
+        </div>
       </div>
     </div>
   </div>
@@ -579,9 +625,23 @@
       </div>
 
     </div>
+
+    <!-- Indicador condição especial -->
+    <div class="text-center mt-12" data-aos="fade-up">
+      <p class="text-gray-500 text-sm uppercase tracking-widest font-semibold mb-2">Condição especial abaixo</p>
+      <div class="flex justify-center">
+        <i class="ph ph-caret-double-down text-sage-500 text-3xl" style="animation: bounce 1.4s ease-in-out infinite;"></i>
+      </div>
+    </div>
   </div>
 </section>
 
+<style>
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(8px); opacity: .6; }
+  }
+</style>
 
 <!-- ══════════════════════════════════════════
      BLOCO 10 — PREÇO + CTA  (id="planos")
@@ -596,76 +656,79 @@
 
     <div class="bg-white rounded-3xl shadow-2xl overflow-hidden" data-aos="zoom-in" data-aos-delay="100">
 
-      <!-- CSS 3D Mockup -->
-      <div class="relative overflow-hidden py-10" style="background:#f0f7f3;">
+      <!-- Mockup image -->
+      <div class="relative overflow-hidden py-10 flex justify-center" style="background:#f0f7f3;">
         <div class="pointer-events-none absolute inset-0 opacity-[0.06]" style="background-image:radial-gradient(circle,#4a7c59 1px,transparent 1px);background-size:28px 28px"></div>
-        <div class="mockup-scene float">
-          <div class="mockup-stack">
-            <div class="mockup-book">
-              <i class="ph ph-book-open text-white text-3xl opacity-50"></i>
-              <p class="text-white text-[10px] font-bold opacity-50 text-center px-2 leading-tight">BÔNUS</p>
-            </div>
-            <div class="mockup-book">
-              <i class="ph ph-book-open text-white text-3xl opacity-70"></i>
-              <p class="text-white text-[10px] font-bold opacity-70 text-center px-2 leading-tight">BÔNUS</p>
-            </div>
-            <div class="mockup-book">
-              <i class="ph ph-book-open text-white text-5xl"></i>
-              <p class="text-white text-sm font-bold text-center px-3 leading-tight">MOVIMENTO EXPRESS</p>
-              <p class="text-sage-200 text-xs text-center px-3">+300 atividades</p>
-            </div>
-          </div>
-        </div>
+        <img src="images/Design sem nome.png" alt="Movimento Express"
+          class="float relative z-10"
+          style="max-width:280px;width:100%;filter:drop-shadow(0 24px 40px rgba(45,90,61,0.28));">
       </div>
 
-      <div class="p-8">
+      <div class="p-5 md:p-8">
 
-        <!-- Checklist -->
-        <div class="space-y-2 mb-8">
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">+300 atividades físicas e cognitivas</p>
+        <!-- Stack de valor -->
+        <div class="bg-gray-50 rounded-2xl p-5 mb-6 space-y-3">
+          <!-- Produto principal -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="ph ph-check-circle text-sage-500 text-lg flex-shrink-0"></i>
+              <span class="text-gray-700 text-sm font-semibold">Movimento Express (+300 atividades)</span>
+            </div>
+            <span class="text-gray-400 text-sm line-through font-medium">R$297</span>
           </div>
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Organizadas por objetivo e nível de dificuldade</p>
+          <div class="border-t border-gray-200"></div>
+          <!-- Bônus -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="ph ph-check-circle text-sage-500 text-lg flex-shrink-0"></i>
+              <span class="text-gray-700 text-sm">Bônus 1 — Guia de Aplicação Segura</span>
+            </div>
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+              <span class="text-gray-400 text-xs line-through">R$47</span>
+              <span class="text-sage-600 text-xs font-bold">GRÁTIS</span>
+            </div>
           </div>
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Passo a passo simples para qualquer pessoa aplicar</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="ph ph-check-circle text-sage-500 text-lg flex-shrink-0"></i>
+              <span class="text-gray-700 text-sm">Bônus 2 — Fichas de Acompanhamento</span>
+            </div>
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+              <span class="text-gray-400 text-xs line-through">R$37</span>
+              <span class="text-sage-600 text-xs font-bold">GRÁTIS</span>
+            </div>
           </div>
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Recomendações de segurança em cada atividade</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="ph ph-check-circle text-sage-500 text-lg flex-shrink-0"></i>
+              <span class="text-gray-700 text-sm">Bônus 3 — Exercícios para Mobilidade Reduzida</span>
+            </div>
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+              <span class="text-gray-400 text-xs line-through">R$47</span>
+              <span class="text-sage-600 text-xs font-bold">GRÁTIS</span>
+            </div>
           </div>
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Bônus: Guia de Aplicação Segura</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="ph ph-check-circle text-sage-500 text-lg flex-shrink-0"></i>
+              <span class="text-gray-700 text-sm">Bônus 4 — Atividades Cognitivas para Memória</span>
+            </div>
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+              <span class="text-gray-400 text-xs line-through">R$37</span>
+              <span class="text-sage-600 text-xs font-bold">GRÁTIS</span>
+            </div>
           </div>
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Bônus: Fichas de Acompanhamento</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Bônus: Exercícios para Mobilidade Reduzida</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Bônus: Atividades Cognitivas para Memória</p>
-          </div>
-          <div class="flex items-start gap-3">
-            <i class="ph ph-check-circle text-sage-500 text-xl flex-shrink-0 mt-0.5"></i>
-            <p class="text-gray-700">Acesso imediato e vitalício</p>
+          <!-- Total riscado -->
+          <div class="border-t-2 border-gray-300 pt-3 flex items-center justify-between">
+            <span class="text-gray-600 text-sm font-semibold">Valor total</span>
+            <span class="text-red-500 line-through text-lg font-bold">R$465</span>
           </div>
         </div>
 
         <!-- Price block -->
         <div class="text-center mb-6">
-          <p class="text-gray-400 text-sm">De</p>
-          <p class="text-red-500 line-through text-2xl font-bold leading-none">R$465</p>
-          <p class="text-gray-400 text-sm mt-2">Por apenas</p>
-          <p class="font-display font-extrabold text-sage-700 leading-none mt-1" style="font-size:5.5rem">R$37</p>
+          <p class="text-gray-400 text-sm">Hoje por apenas</p>
+          <p class="font-display font-extrabold text-sage-700 leading-none mt-1" style="font-size:clamp(3.5rem,16vw,5.5rem)">R$37</p>
           <p class="text-gray-500 text-sm mt-2">Pagamento único · Acesso imediato · Sem mensalidade</p>
           <p class="text-amber-600 text-xs font-medium mt-1 italic">Preço promocional por tempo limitado</p>
         </div>
@@ -788,14 +851,14 @@
 <!-- ══════════════════════════════════════════
      BLOCO 13 — CTA FINAL
 ══════════════════════════════════════════ -->
-<section id="cta-final" class="py-20 md:py-28 text-center" style="background:linear-gradient(140deg,#2d5a3d 0%,#4a7c59 100%);">
+<section id="cta-final" class="py-14 md:py-28 text-center" style="background:linear-gradient(140deg,#2d5a3d 0%,#4a7c59 100%);">
   <div class="max-w-2xl mx-auto px-5">
-    <h2 class="font-display text-3xl md:text-5xl font-bold text-white leading-tight mb-5" data-aos="fade-up">
+    <h2 class="font-display text-2xl md:text-5xl font-bold text-white leading-tight mb-4" data-aos="fade-up">
       +300 Atividades Prontas Para Manter o Idoso Ativo, Seguro e Com a Mente Estimulada
     </h2>
-    <p class="text-sage-200 text-lg mb-10" data-aos="fade-up" data-aos-delay="100">Você não precisa ser profissional. Precisa de um bom material.</p>
+    <p class="text-sage-200 text-base md:text-lg mb-8" data-aos="fade-up" data-aos-delay="100">Você não precisa ser profissional. Precisa de um bom material.</p>
     <div data-aos="zoom-in" data-aos-delay="200">
-      <a href="#planos" class="btn-cta text-xl py-5 px-12 inline-block" style="box-shadow:0 12px 36px rgba(232,134,58,.45)">
+      <a href="#planos" class="btn-cta text-base md:text-xl py-4 px-8 w-full md:w-auto block md:inline-block" style="box-shadow:0 12px 36px rgba(232,134,58,.45)">
         Quero o Movimento Express agora
       </a>
     </div>
@@ -821,7 +884,21 @@
 
 <script>
   /* ── AOS ── */
-  AOS.init({ duration: 680, once: true, easing: 'ease-out-cubic', offset: 50 });
+  const isMobile = window.innerWidth < 640;
+  AOS.init({
+    duration: isMobile ? 400 : 680,
+    once: true,
+    easing: 'ease-out-cubic',
+    offset: isMobile ? 20 : 50,
+    disable: false,
+  });
+  // No mobile, converte animações laterais para fade-up para evitar overflow
+  if (isMobile) {
+    document.querySelectorAll('[data-aos="fade-right"],[data-aos="fade-left"]').forEach(el => {
+      el.setAttribute('data-aos', 'fade-up');
+      el.setAttribute('data-aos-delay', '0');
+    });
+  }
 
   /* ── GSAP ── */
   gsap.registerPlugin(ScrollTrigger);
