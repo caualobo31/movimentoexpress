@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 405 720" width="405" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3626"/>
+      <stop offset="100%" stop-color="#2d5a3d"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#4a7c59" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow-btn">
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#f59e0b" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="405" height="720" fill="url(#bg)"/>
+
+  <!-- Subtle noise / texture overlay -->
+  <rect width="405" height="720" fill="url(#glow)" opacity="0.6"/>
+
+  <!-- Decorative circle top-right -->
+  <circle cx="360" cy="80" r="120" fill="#4a7c59" opacity="0.12"/>
+  <!-- Decorative circle bottom-left -->
+  <circle cx="50" cy="650" r="100" fill="#f59e0b" opacity="0.08"/>
+
+  <!-- Top label -->
+  <rect x="127" y="72" width="152" height="30" rx="15" fill="#f59e0b"/>
+  <text x="203" y="92" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1a3626" text-anchor="middle" letter-spacing="1">MOVIMENTO EXPRESS</text>
+
+  <!-- Main headline -->
+  <text x="202" y="200" font-family="Georgia, serif" font-size="38" font-weight="bold" fill="white" text-anchor="middle">+300</text>
+  <text x="202" y="248" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#d8eee1" text-anchor="middle">Dinâmicas para</text>
+  <text x="202" y="278" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#d8eee1" text-anchor="middle">Idosos</text>
+
+  <!-- Divider line -->
+  <line x1="142" y1="305" x2="263" y2="305" stroke="#4a7c59" stroke-width="1.5"/>
+
+  <!-- Sub text -->
+  <text x="202" y="332" font-family="sans-serif" font-size="13" fill="#a3c4b0" text-anchor="middle">Físicas · Cognitivas · Seguras</text>
+
+  <!-- Play button circle -->
+  <circle cx="202" cy="460" r="58" fill="white" opacity="0.08"/>
+  <circle cx="202" cy="460" r="46" fill="#f59e0b" filter="url(#glow-btn)"/>
+  <!-- Play triangle -->
+  <polygon points="192,443 192,477 224,460" fill="white"/>
+
+  <!-- Assistir agora label -->
+  <text x="202" y="540" font-family="sans-serif" font-size="13" fill="#d8eee1" text-anchor="middle" letter-spacing="0.5">Assistir agora</text>
+
+  <!-- Bottom benefit chips -->
+  <rect x="52" y="600" width="94" height="28" rx="14" fill="#4a7c59" opacity="0.5"/>
+  <text x="99" y="619" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Fácil de aplicar</text>
+
+  <rect x="157" y="600" width="94" height="28" rx="14" fill="#4a7c59" opacity="0.5"/>
+  <text x="204" y="619" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Sem experiência</text>
+
+  <rect x="262" y="600" width="94" height="28" rx="14" fill="#4a7c59" opacity="0.5"/>
+  <text x="309" y="619" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">+300 dinâmicas</text>
+
+  <!-- Bottom brand -->
+  <text x="202" y="685" font-family="sans-serif" font-size="11" fill="#4a7c59" text-anchor="middle" letter-spacing="2">MOVIMENTOEXPRESS.COM.BR</text>
+</svg>
