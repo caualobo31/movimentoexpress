@@ -929,6 +929,21 @@
   });
 
   /* ── VSL facade ── */
+  /* ── UTM passthrough para checkout ── */
+  (function() {
+    const utmKeys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','src','sck'];
+    const params = new URLSearchParams(window.location.search);
+    const utmParams = new URLSearchParams();
+    utmKeys.forEach(k => { if (params.get(k)) utmParams.set(k, params.get(k)); });
+    const utmString = utmParams.toString();
+    if (!utmString) return;
+    document.querySelectorAll('a[href*="pay.lowify.com.br"]').forEach(a => {
+      const url = new URL(a.href);
+      utmParams.forEach((v, k) => url.searchParams.set(k, v));
+      a.href = url.toString();
+    });
+  })();
+
   function loadVSL() {
     const facade = document.getElementById('vsl-facade');
     facade.innerHTML = '<iframe src="https://player.vimeo.com/video/1187396976?badge=0&autopause=0&autoplay=1&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="."></iframe>';
